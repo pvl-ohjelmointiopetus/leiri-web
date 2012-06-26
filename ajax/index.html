@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Esimerkki tiedon lataamisesta</title>
+    <!-- lataa tarvttavat työkalukirjastot, eli jQuery ja jQuery UI -->
+    <link rel="stylesheet" type="text/css" href="../libs/jquery-ui/themes/base/jquery-ui.css"></link>
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <script type="text/javascript" src="../libs/jquery-ui/jquery-ui.js"></script>
+</head>
+<body>
+
+<p id="description">
+    Tähän mennessä olemme keskittyneet verkkosivuihin, joissa tieto on ollut valmiina.
+    Kuitenkin, eräs merkittävä idea moderneissa verkkosivuissa on, että ne voivat ladata tietoa tarpeen mukaan. Huomaat sen painamalla <a id="description-more" href="#">tästä</a>.
+</p>
+
+<script type="text/javascript">
+    // kun elementtiä description-more painetaan, suorietaan
+    $('#description-more').click( function(){
+        // HTTP GET pyyntö osoitteesen ./more.txt, eli haetaan kaikki, mitä on ./more.txt:ssä
+        $.get('./more.txt', function(data) {
+            // ja kun se on valmis, saatu teksti sijoitetaan kenttään #description
+            $('#description').html( data );
+        });
+    });
+</script>
+
+</body>
+</html>
