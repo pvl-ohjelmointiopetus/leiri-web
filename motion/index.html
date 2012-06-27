@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>Esimerkki kiihtyvyysantureista</title>
+    <!-- lataa tarvttavat työkalukirjastot, eli jQuery ja jQuery UI -->
+    <link rel="stylesheet" type="text/css" href="../libs/jquery-ui/themes/base/jquery-ui.css"></link>
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <script type="text/javascript" src="../libs/jquery-ui/jquery-ui.js"></script>
+</head>
+<body>
+
+<span id='box' style='background: blue; width: 20px; height: 20px; position: absolute;'></span>
+
+<div id='error-box' style='display: none;'>Kiihtyvyysanturi ei toimi tässä laitteessa oikein.</div>
+
+
+<script type="text/javascript">
+// tarkkaillaan, tukeeko laite kiihtysyyanturia
+if(window.DeviceOrientationEvent){
+    // jos tukee, kutsutaan processData-funktiota aina kun sen tiedot muuttuvat
+    window.addEventListener('deviceorientation', processData );
+}else{
+    $('#error-box').dialog();
+}
+
+// siirrä laatikkoa muuttuneen luvun suhtene
+function move(dx, dy) {
+    var x = $('#box').position().top;
+    var y = $('#box').position().left;
+    x = x + dx;
+    y = y + dy;
+    $('#box').css( {'left': y, 'top' : x} );
+}
+
+// aina kun laitteen orientaatio on muuttunut, tee tämä
+function processData(eventData) {
+
+    // tiedot tulee eventData-muuttujassa
+    var alpha = eventData.alpha; // laitteen kierto
+    var beta = eventData.beta; // pystyakselin suhteen
+    var gamma = eventData.gamma; // vaaka-akselin suhteen
+
+    // salli näin paljon virhettä
+    var tolerance = 5;
+
+    // liikuta, jos laitetta on muutettu tarpeeksi
+    if( gamma < - tolerance ) {
+        move( 0, 5 );
+    }
+    if( gamma > tolerance ) {
+        move( 0, -5 );
+    }
+}
+
+</script>
+
+</body>
+</html>
