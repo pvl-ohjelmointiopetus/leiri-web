@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Esimerkki tietojen tallentamisesta</title>
+    <!-- lataa tarvttavat työkalukirjastot, eli jQuery ja jQuery UI -->
+    <link rel="stylesheet" type="text/css" href="../libs/jquery-ui/themes/base/jquery-ui.css"></link>
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <script type="text/javascript" src="../libs/jquery-ui/jquery-ui.js"></script>
+</head>
+<body>
+
+<input id='nimi'></input>
+<input id='numero'></input>
+<button id='lisaa'>Lisää</button>
+
+<ul id='numerot'>
+</ul>
+
+<script type="text/javascript">
+
+    function lisaa(nimi, numero) {
+        var kohta = $('<li>');
+        kohta.html( nimi + ' : ' + numero );
+        kohta.appendTo( $('#numerot') );
+    }
+
+    // kun näppäintä painetaan
+    $('#lisaa').click( function() {
+        // ota talteen arvo ja tyhjennä tekstikenttä
+        var nimi = $('#nimi').val();
+        var numero = $('#numero').val();
+        $('#nimi').val('');
+        $('#numero').val('');
+        //
+        window.localStorage.setItem( nimi, numero );
+        lisaa( nimi, numero );
+    } );
+
+    // kun ohjelma ladataan, käydään läpi mitä on jo tallessa
+    for( var nimi in window.localStorage ) { 
+        var numero = window.localStorage.getItem( nimi );
+        lisaa( nimi, numero );
+    }
+</script>
+
+</body>
+</html>
