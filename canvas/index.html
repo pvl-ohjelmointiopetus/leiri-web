@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Esimerkki piirtämisestä</title>
+    <!-- lataa tarvttavat työkalukirjastot, eli jQuery ja jQuery UI -->
+    <link rel="stylesheet" type="text/css" href="../libs/jquery-ui/themes/base/jquery-ui.css"></link>
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <script type="text/javascript" src="../libs/jquery-ui/jquery-ui.js"></script>
+</head>
+<body>
+
+<canvas id="pinta" style="width: 100%; height: 200px;">
+</canvas>
+
+<script type="text/javascript">
+    var pinta = document.getElementById("pinta");
+    pinta = pinta.getContext("2d");
+    // piirretään punaisella
+    pinta.fillStyle = "rgb(200,0,0)";  
+    // suorakaide: lähtöpaikka, koko
+    pinta.fillRect (50, 50, 10, 10);  
+  
+    // piirretän loput sinisenä ja läpinäkyvänä
+    pinta.fillStyle = "rgba(0, 0, 200, 0.5)";
+
+    pinta.fillRect (30, 30, 55, 50); 
+</script>
+
+</body>
+</html>
